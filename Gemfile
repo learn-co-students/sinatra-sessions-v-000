@@ -11,6 +11,6 @@ gem 'pry'
 gem 'require_all'
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '3.4.0'
   gem 'rack-test'
 end
