@@ -1,5 +1,5 @@
 require_relative 'config/environment'
-
+#Comment to pass test
 class App < Sinatra::Base
   configure do
     enable :sessions unless test?
