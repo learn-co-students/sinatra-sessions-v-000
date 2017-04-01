@@ -13,4 +13,5 @@ gem 'require_all'
 group :test do
   gem 'rspec'
   gem 'rack-test'
+  gem 'learn-co'
 end
