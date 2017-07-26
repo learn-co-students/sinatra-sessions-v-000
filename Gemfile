@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'eventmachine', '~>1.0.5'
+gem 'eventmachine'
 gem 'sinatra'
 gem 'rake'
 gem 'thin'
