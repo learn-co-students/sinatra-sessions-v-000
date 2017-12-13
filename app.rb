@@ -5,17 +5,14 @@ class App < Sinatra::Base
     enable :sessions unless test?
     set :session_secret, "secret"
   end
+# sets up to use the sessions keyword to access the session hash
 
   before do
     content_type :txt
   end
 
   get '/' do
-    "Welcome to Sinatra Sessions! In this lab, we will be learning about the general principles behind a sessions cookie. In order to proceed, let's go to the '/first_exercise' path."
-  end
-
-  get '/first_exercise' do
-    "Your first exercise will be to set your session key-value pair.\nIn the route: get '/set', write a line of code that sets the :foo key of the session hash equal to 'hello'.\nThen, naviate to the '/set' path."
+    erb :set
   end
 
   get '/set' do
