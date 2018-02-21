@@ -4,11 +4,13 @@ class App < Sinatra::Base
   configure do
     enable :sessions unless test?
     set :session_secret, "secret"
+    set :views, 'views'
   end
 
-  before do
-    content_type :txt
-  end
+  # This thing makes it impossible to render actual HTML in this thing :(
+  #before do
+  #  content_type :txt
+  #end
 
   get '/' do
     "Welcome to Sinatra Sessions! In this lab, we will be learning about the general principles behind a sessions cookie. In order to proceed, let's go to the '/first_exercise' path."
@@ -59,5 +61,50 @@ class App < Sinatra::Base
 
   get '/finish' do
     "Hopefully that explains a little more about the concept of sessions.\nThe session is simply a way to store user data on a temporary basis.\nIn any web application, a user ID is typically used as a session ID.\nThis is because an ID attribute of a user is a unique identifier\nthat will always be distinguishable from other user ID attributes."
+  end
+
+  get '/burd_one' do
+    session[:eyedee] = 2345
+    "You now have the correct session set to go to '/burd_two'"
+  end
+
+  get '/burd_two' do
+    if session[:eyedee] == 2345
+      "Congradulations; you have the correct permission"
+    else
+      "You aren't allowed in here!!!"
+    end
+  end
+
+  get '/burdlogin' do
+    erb :burdlogin
+  end
+
+  post '/burd_sessions' do
+    session[:email] = params[:email]
+    redirect '/posts'
+  end
+
+  get '/posts' do
+  # binding.pry
+    if session[:email] != nil
+  # if !(session[:email].empty?)
+      "You are logged in as #{session[:email]}"
+    else
+      "You aren't logged in at all!!"
+    end
+  end
+
+  get '/burdlogout' do
+    session.clear
+  end
+
+  get '/posts/new' do
+    # First check & see if they're logged in at all
+    if !session[:email]
+      redirect "/burdlogin" # redirecting if they aren't
+    else
+      "A new post form"
+    end
   end
 end
