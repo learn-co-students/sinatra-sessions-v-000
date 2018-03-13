@@ -1,5 +1,5 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 # gem "rails"
 gem 'eventmachine', '~>1.0.5'
