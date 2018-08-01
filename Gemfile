@@ -1,6 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
+gem 'learn-co'
 # gem "rails"
 gem 'eventmachine', '~>1.0.5'
 gem 'sinatra'
