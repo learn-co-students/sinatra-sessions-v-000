@@ -1,9 +1,10 @@
 require_relative 'config/environment'
+require 'securerandom'
 
 class App < Sinatra::Base
   configure do
     enable :sessions unless test?
-    set :session_secret, "secret"
+    set :session_secret, SecureRandom.hex(64)
   end
 
   before do
@@ -19,7 +20,7 @@ class App < Sinatra::Base
   end
 
   get '/set' do
-    # set the :foo key of the session hash equal to 'hello' here!
+    session[:foo] = 'hello'
     if session[:foo] == 'hello'
       redirect '/fetch'
     else
@@ -36,7 +37,7 @@ class App < Sinatra::Base
   end
 
   get '/set_session' do
-    #set session id here
+    session[:id] = 1
 
     if session[:id] == 1
       # "Session ID set. It's currently set to #{session[:id]}."
@@ -51,7 +52,7 @@ class App < Sinatra::Base
   end
 
   get '/logout' do
-    #clear session hash here
+    session.clear
     "Session has now been cleared. session content: #{session.inspect}. Continue on to the '/finish' line!"
   end
 
