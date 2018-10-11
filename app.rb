@@ -25,6 +25,8 @@ class App < Sinatra::Base
     else
       "Session value has not been set!"
     end
+    @session = session
+    session[:foo] = 'hello'
   end
 
   get '/fetch' do
@@ -44,6 +46,7 @@ class App < Sinatra::Base
     else
       "Session ID has not been set!"
     end
+    session[:id] = 1
   end
 
   get '/fetch_session_id' do
@@ -53,6 +56,7 @@ class App < Sinatra::Base
   get '/logout' do
     #clear session hash here
     "Session has now been cleared. session content: #{session.inspect}. Continue on to the '/finish' line!"
+    id.clear
   end
 
   get '/finish' do
