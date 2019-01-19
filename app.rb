@@ -1,4 +1,5 @@
 require_relative 'config/environment'
+require_relative 'config/environment'
 
 class App < Sinatra::Base
   configure do
@@ -19,6 +20,8 @@ class App < Sinatra::Base
   end
 
   get '/set' do
+    @session = session 
+    @session[:foo] = 'hello'
     # set the :foo key of the session hash equal to 'hello' here!
     if session[:foo] == 'hello'
       redirect '/fetch'
@@ -36,6 +39,8 @@ class App < Sinatra::Base
   end
 
   get '/set_session' do
+    @session = session 
+    @session[:id] = 1
     #set session id here
 
     if session[:id] == 1
@@ -51,6 +56,7 @@ class App < Sinatra::Base
   end
 
   get '/logout' do
+    @session.clear
     #clear session hash here
     "Session has now been cleared. session content: #{session.inspect}. Continue on to the '/finish' line!"
   end
