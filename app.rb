@@ -12,6 +12,8 @@ class App < Sinatra::Base
 
   get '/' do
     "Welcome to Sinatra Sessions! In this lab, we will be learning about the general principles behind a sessions cookie. In order to proceed, let's go to the '/first_exercise' path."
+    session[:foo] = "hello"
+    @session = session
   end
 
   get '/first_exercise' do
@@ -20,7 +22,7 @@ class App < Sinatra::Base
 
   get '/set' do
     # set the :foo key of the session hash equal to 'hello' here!
-    if session[:foo] == 'hello'
+    if session[:foo] = 'hello'
       redirect '/fetch'
     else
       "Session value has not been set!"
@@ -37,7 +39,8 @@ class App < Sinatra::Base
 
   get '/set_session' do
     #set session id here
-
+    session[:id] = 1
+    
     if session[:id] == 1
       # "Session ID set. It's currently set to #{session[:id]}."
       redirect '/fetch_session_id'
@@ -53,6 +56,7 @@ class App < Sinatra::Base
   get '/logout' do
     #clear session hash here
     "Session has now been cleared. session content: #{session.inspect}. Continue on to the '/finish' line!"
+    @session.clear
   end
 
   get '/finish' do
